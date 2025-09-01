@@ -111,7 +111,6 @@ weather-apps/
 |---Weather.html
 │--Weather.py
 
-
 ---
 
 ## Contact
