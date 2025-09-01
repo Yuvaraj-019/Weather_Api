@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body class="{{ bg_class }} {{ time_of_day }}">
+
+  <div class="main-container">
+    <div class="container">
+      <h1>Weather App</h1>
+      <form method="POST">
+        <input type="text" name="city" placeholder="Enter city name" required />
+        <button type="submit">Search</button>
+      </form>
+
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+
+      {% if weather %}
+      <div class="weather-container">
+        <h2>{{ weather.city }}, {{ weather.country }}</h2>
+        <p>{{ weather.time_of_day }} (Local Time: {{ weather.local_time }})</p>
+        <img src="{{ weather.icon }}" alt="{{ weather.condition }}" />
+        <h1>{{ weather.temp }}°C</h1>
+        <p>{{ weather.condition }}</p>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if weather %}
+    <div class="forecast-container">
+      <h2>5-Day Forecast</h2>
+      <div class="forecast-grid">
+        {% for day in forecast %}
+        <div class="forecast-day">
+          <p>{{ day.date }}</p>
+          <img src="{{ day.icon }}" alt="{{ day.condition }}" />
+          <p>{{ day.temp }}°C</p>
+          <p>{{ day.condition }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      <h2>Current Conditions</h2>
+      <div class="details-grid">
+        <p>AQI: {{ weather.aqi }}</p>
+        <p>UV Index: {{ weather.uv }}</p>
+        <p>Pressure: {{ weather.pressure }} mb</p>
+        <p>Humidity: {{ weather.humidity }}%</p>
+        <p>Chance of Rain: {{ weather.precip_chance }}%</p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  {% if bg_class == 'cloudy' or bg_class == 'overcast' %}
+  <div class="cloud-layer-3"></div>
+  {% endif %}
+  {% if bg_class == 'rain' %}
+  <div class="dark-cloud-layer"></div>
+  <div class="raindrop-layer {{ time_of_day }} {% if rain_type %}{{ rain_type }}{% else %}normal{% endif %}">
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <!-- Additional raindrops for better coverage -->
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+  </div>
+  {% endif %}
+
+</body>
+</html>
