@@ -99,10 +99,18 @@ python weather_script.py
   - [Weatherbit](https://www.weatherbit.io/api)
 
 ---
+weather-apps/
+│
+├── flask-weather_Api
+│   ├── app.py                  # Main Flask application
+│   ├── requirements.txt        # Python dependencies
+│   ├── .env                    # Environment variables (API key) - add to .gitignore
+│   ├── templates/              # HTML templates (Jinja2)
+│   │   └── index.html
 
-## License
+|---Weather.html
+│--Weather.py
 
-This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
