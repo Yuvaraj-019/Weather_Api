@@ -6,7 +6,7 @@ from datetime import datetime
 import pytz
 
 load_dotenv()
-app = Flask(__name__)
+app = Flask(__name__,static_folder='static', template_folder='templates')
 
 API_KEY = os.getenv("WEATHERAPI_KEY")  # WeatherAPI key
 BASE_URL = "https://api.weatherapi.com/v1/forecast.json"
